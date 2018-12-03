@@ -14,20 +14,7 @@ title: Shop
 
       <hr>
 
-      <div class="social-share">
-        <h4> Did you <i class="fa fa-heart featured"></i> this? Share it on ... </h4>
-        <nav>
-            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">
-                <i class="fa fa-twitter"></i>Twitter
-            </a>
-            <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Facebook">
-                <i class="fa fa-facebook"></i>Facebook
-            </a>
-            <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Google+">
-              <i class="fa fa-google-plus"></i>Google +
-            </a>
-        </nav>
-      </div>
+      {% include social-share.html %}
 
   </div>
 
@@ -43,12 +30,13 @@ title: Shop
 
         <h3> Categories </h3>
 
-        <!-- this will output all categories on your site -->
+        <!-- this will output a list of all the categories on your site -->
         {% for category in site.categories %}
           <a href="/category/{{category | first }}" class="category"> {{category | first}} </a>
         {% endfor %}
 
-      </div>
+    </div>
   </div>
 </section>
+
 {% include instagram.html %}

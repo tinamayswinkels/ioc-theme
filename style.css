@@ -27,10 +27,6 @@ img {
   max-width: 100%; /* This ensures an image never breaks it's container */
 }
 
-[class*=grid-][class*=-equalHeight]>[class*=col] {
-  display:block;
-  /* This overrides a quirk where contents inside of equal height containers become columns themselves */
-}
 /* ---- GENERAL HELPER CLASSES --------------------------- */
 .tall         { min-height:100vh; }
 .med-height   { min-height: 50vh; }
@@ -41,15 +37,29 @@ img {
 
 .no-padding { padding: 0; }
 
+.padded-1 { padding: 1%; }
+.padded-3 { padding: 3%; }
+.padded-5 { padding: 5%; }
+
+.padded-top-1 { padding-top: 1%;}
+
 .mob-show { display: none;}
 
+.bg-img {
+  background-color: grey;
+  background-size: cover;
+  background-position: center;
+}
 
 /* ----- UNIVERSAL STYLES --------------------------- */
 
-.featured{
+.bg-featured{
   background-color: #1abc9c;
   color: white;
 }
+.bg-dark {}
+
+.bg-light {}
 
 .featured h1,
 .featured h2,
@@ -57,18 +67,13 @@ img {
   color: white;
 }
 
-
-
 section {
   padding: 10vh 5%;
 }
 
-
-
 body {
   font-family: 'Work Sans';
   color: rgb(60,60,65);
-}
 
 h1, h2, h3, h4 {
   text-transform: uppercase;
