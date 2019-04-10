@@ -14,7 +14,6 @@ Website Colours: List colour hex codes here for reference
 */
 
 
-
 /* ---- CSS RESET --------------------------- */
 * {
   margin: 0;
@@ -24,6 +23,8 @@ Website Colours: List colour hex codes here for reference
 
 img {
   max-width: 100%; /* This ensures an image never breaks it's container */
+  height: auto;
+  background-color: rgb(220,220,225);
 }
 
 [class*=grid-][class*=-equalHeight]>[class*=col] {
@@ -37,7 +38,7 @@ img {
 .short        { min-height: 30vh; }
 
 .left         { text-align: left; }
-.centered     { text-align: center; }
+.center     { text-align: center; }
 .right        { text-align: right; }
 
 .no-padding { padding: 0; }
@@ -74,12 +75,27 @@ p  { font-size: 1.1rem; line-height: 1.5;}
 blockquote  { font-size: 1.1rem; line-height: 1.5;}
 li  { font-size: 1.1rem; }
 
+blockquote {
+  border-left: 2px solid rgb(245,245,245);
+  margin-left: 3%;
+  padding-left: 3%;
+  font-weight: 600;
+  color: rgb(90,90,95);
+}
+
+/* Lists */
+ul      { list-style: circle inside; }
+ol      { list-style: decimal inside;}
+ol, ul  { padding-left: 0;
+          margin-top: 0; }
+li      { margin-bottom: 0.5rem; }
+
 
 /* Padding & Margin */
 
-header, footer  { padding: 2vh 5%; }
+header, footer  { padding: 2% 5%; }
 
-section         { padding: 10vh 5%; }
+section         { padding: 5%; }
 
 .col,
 [class*=col-]   { padding: 2%; }
@@ -87,26 +103,36 @@ section         { padding: 10vh 5%; }
 
 /* Other universal styles */
 
-.featured{
+.bg-featured{
   background-color: #1abc9c; /* featured color */
   color: white;
 }
-.fa.featured {
+.bg-light {
+  background-color: rgb(230,230,235); /* featured color */
+}
+.bg-dark {
+  background-color: rgb(90,90,95); /* featured color */
+  color: white;
+}
+
+/* featured icons */
+[class*=fa].featured {
   color: #1abc9c; /* featured color */
   background: none;
 }
 
+.icon [class*=fa] {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+/* horizontal rule aka lines */
 hr {
-  border: none;
+  border: none; /* this removes the weirdly styled border */
   border-top: 1px solid rgb(245,245,245);
-  margin: 3vh 0;
+  margin: 1rem 0;
 }
-.previous, .next { /* This is to navigate to the previous and next page of pagination for blogs */
-    padding: 0 1.5em;
-    text-decoration: none;
-    color: inherit;
-    font-weight: bold;
-}
+
 
 /* ----- HEADER & FOOTER --------------------------- */
 nav a {
@@ -127,6 +153,10 @@ nav a:hover {
 header {
   border-bottom: 1px solid rgb(245,245,245);
 }
+header [class*=col] {
+  padding: 0;
+}
+
 footer {
   border-top: 1px solid rgb(245,245,245);
 }
@@ -135,19 +165,45 @@ footer nav a {
   padding: 0.5em;
 }
 
-footer nav .fa,
-.social-share nav .fa {
+footer nav [class*=fa], /* this special selector is targetting all classes with a fa, which includes all the font-awesome icons */
+.social-share nav [class*=fa] {
   padding: 0 1em 0 0;
 }
 
-.pure-drawer { /* pop-out hamburger menu */
-  padding: 5em 3%;
+
+.social-share hr{
+  margin: 3rem 0;
+}
+/* Hamburger menu */
+
+.burger-menu{
+  position:fixed;
+  right:1rem;
+  top:1rem;
+  padding: 0.5rem;
+  z-index:9;
+  display: none;
 }
 
-.mob-nav a {
-  display: block;
-  padding: 0.5em;
+.burger-menu .fas {
+  font-size: 2rem;
 }
+
+.burger-content{
+  display:none;
+  position:fixed;
+  top:0;
+  left: 0;
+  right:0;
+  background-color: rgba(255,255,255,0.9);
+  padding: 10%;
+  text-align: center;
+}
+.burger-content a{
+  display:block;
+  padding:1%;
+}
+
 
 /* ----- MODULAR ELEMENTS --------------------------- */
 .banner {
@@ -155,73 +211,122 @@ footer nav .fa,
   background-size: cover;
   background-position: center;
   min-height:80vh;
+  position: relative;
 }
 
-.box-img { /* This can be used for any col or div that you want filled with a background image. */
+.banner.overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#353b48, #000000);
+    opacity: .5;
+    z-index: 1;
+}
+
+.banner div {
+  position: relative;
+  z-index: 2;
+}
+
+.bg-img { /* This can be used for any col or div that you want filled with a background image. */
   background-color: grey; /* this is a fallback incase the image doesn't load */
-  background-image: url('/images/yoga-1.jpg'); /* if you are adding a unique image to every one you can remove this */
+  background-image: url('/images/yoga-1.jpg'); /* if you are adding a unique image to every one you can remove this, or use a placeholder here */
   background-size: cover;
   background-position: center;
   min-height: 20vh;
 }
 
+.bg-image.landscape {
+  padding-bottom: 60%;
+}
+
+.bg-image.tall {
+  padding-bottom: 110%;
+}
+
 /* Buttons */
- button, /* button is an element snipcart uses */
+
 .button,
-.button-inverted {
-  background-color: #1abc9c; /* featured color */
-  border: none;
-  border-radius: 5px;
+.button-solid,
+.button-inverted { /* styles for all buttons */
   padding: 0.5em 3em;
   margin: 1em auto;
   display: inline-block;
   text-decoration: none;
   text-transform: uppercase;
+  transition: all 0.5s;
+}
+
+.button {
+  border: 2px solid #1abc9c; /* featured color */
+  color: #1abc9c; /* featured color */
+}
+
+.button:hover {
+  border-color: rgb(60,60,65);
+  color: rgb(60,60,65);
+}
+
+.button-solid {
+  border: 2px solid #1abc9c; /* featured color */
+  background-color: #1abc9c; /* featured color */
   color: white;
 }
+
+.button-solid:hover {
+  background-color: rgb(60,60,65);
+  border-color: rgb(60,60,65);
+}
+
 .button-inverted {
-    border: 2px solid white;
-    color: white;
+  border: 2px solid white; /* featured color */
+  color: white; /* featured color */
 }
-.button:hover,
+
+
 .button-inverted:hover {
-  font-weight: semi-bold;
+  border-color: rgb(90,90,95);
+  color: rgb(90,90,95);
 }
 
-/* Shop Elements */
-.product-loop a {
-  color: inherit;
+/* Cards */
+
+.card {
+  display: block;
   text-decoration: none;
-  width: 100%;
-  margin: 0;
+  color: inherit;
+  border: 2px solid rgb(200,200,205);
+  transition: margin 0.5s;
 }
 
-.product-loop .box-img {
-  min-height: 30vh;
+.card:hover {
+  margin-top: -10px;
 }
 
-.product-loop h3 {
-    font-size: 1.5rem;
-    font-weight: normal;
-    margin-bottom: 0;
+.card .card-text {
+  padding: 1rem;
 }
 
-/* Customising the snipcart pop-up */
-.snip-layout .snip-header,
-.snip-layout .snip-footer {
-  background-color:  #1abc9c; /* featured color */
-}
-.snip-layout .snip-footer__copyright {
-  color: white;
+.card .bg-img {
+  padding-bottom: 60%; /* this controls the aspect ratio of the images, make it higher for square or portrait images */
 }
 
 /* Blog elements */
-.blog-loop a {
+.blog-loop .blog-item {
   color: inherit;
   text-decoration: none;
   width: 100%;
   margin: 0;
 }
+
+.blog-loop .bg-img {
+  padding-bottom: 60%;
+  margin-bottom: 0.5rem;
+}
+
 .blog-loop img,
 .post-body img {
     margin-bottom: 2vh;
@@ -239,26 +344,38 @@ footer nav .fa,
   padding: 2rem;
   margin: 2vh 0;
 }
-blockquote {
-  border-left: 2px solid rgb(245,245,245);
-  margin-left: 3%;
-  padding-left: 3%;
-  font-weight: 600;
-  color: rgb(90,90,95);
+
+.previous, .next { /* This is to navigate to the previous and next page of pagination for blogs */
+    padding: 0 1.5em;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
 }
-/* Lists */
-ul      { list-style: circle inside; }
-ol      { list-style: decimal inside;}
-ol, ul  { padding-left: 0;
-          margin-top: 0; }
-li      { margin-bottom: 0.5rem; }
+
+.category {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(90,90,95);
+  border: 1px solid rgb(90,90,95);
+  margin: 2px;
+  padding: 2px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+a.category:hover {
+  border-color: #1abc9c; /* featured color */
+  color: #1abc9c; /* featured color */
+}
+
 
 /* ----- FORMS --------------------------- */
 
 input,
 textarea {
   border-style: solid;
-  border: 1px solid grey;
+  border: 2px solid rgb(200,200,205);
   padding: 0.8em;
   font-family: 'Work Sans'; /* Site Font */
   font-size: 1em;
@@ -267,23 +384,40 @@ textarea {
   margin: 1em auto;
   vertical-align: top;
 }
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #1abc9c; /* featured color */
+}
+
 textarea {
   min-height: 7em;
 }
 input[type="submit"] {
   width: auto;
   display: block;
-  background-color: #1abc9c; /* featured color */
 }
 
 form [class*=col-] {
-  padding: 1%;
+  padding: 5px;
+}
+
+
+.email-signup input {
+    width: 30%;
+    display: inline-block;
+    max-width: 250px;
+}
+.email-signup input[type="submit"] {
+  padding: 0.8em;
+  border-radius: 0;
 }
 
 /* ------------ BACKGROUND IMAGES --------------- */
 
+/* home page intro banner */
 #intro-banner {
-  background-image: url('/images/yoga-1.jpg'); /* This is just an axample */
+  background-image: url('/images/yoga-1.jpg'); /* This is just an example */
 }
 
 /*------- Media Queries ------------------------*/
@@ -294,7 +428,8 @@ form [class*=col-] {
   .mob-hide {
       display: none!important;
   }
-  .mob-show {
+  .mob-show,
+  .burger-menu {
     display: block;
   }
 
@@ -312,9 +447,9 @@ form [class*=col-] {
   /* ------ General Mobile Styles ---------*/
   /* This aligns everything to center on mobile, this is purely slylistic, remove or adjust to suit your design */
   body,
-  .left,
+  .center,
   .right {
-    text-align: center;
+    text-align: left;
   }
   /* This adjusts the padding on all columns, this is purely slylistic, adjust to suit your design. */
   /* [class*=col-] is a fancy selector that selects everything class that contains col- including col-3, col-4 etc. */

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
 
-
   {% include head.html %}
 
   <!-- This adds page specific content to the head of that page. -->
@@ -11,21 +10,14 @@
 
 <body>
 
-<div class="pure-container" data-effect="pure-effect-slide">
+  {% include hamburger-nav.html %}
 
-  {% include hamburger-content.html %}
+  {% include site-header.html %}
 
-  <div class="pure-pusher-container">
-      <div class="pure-pusher"> <!-- this contains all of the body of the site -->
+  {{content}}
 
-        {% include site-header.html %}
+  {% include site-footer.html %}
 
-        {{content}}
-
-        {% include site-footer.html %}
-
-      </div> <!-- end pure-pusher -->
-  </div> <!-- end pure pusher container -->
-
-{% include body-scripts.html %}
+  <!-- end page content -->
+  {% include body-scripts.html %}
 </body>

@@ -15,7 +15,6 @@ Website Colours: List colour hex codes here for reference
 */
 
 
-
 /* ---- CSS RESET --------------------------- */
 * {
   margin: 0;
@@ -32,7 +31,7 @@ img {
 .med-height   { min-height: 50vh; }
 
 .left         { text-align: left; }
-.centered     { text-align: center; }
+.center     { text-align: center; }
 .right        { text-align: right; }
 
 .no-padding { padding: 0; }
@@ -100,4 +99,117 @@ h3 {
   font-size: 2.5em;
   margin: 0 0 0.5em;
   color: #1abc9c; /* featured-color */
+}
+
+
+/* ----- HEADER & FOOTER --------------------------- */
+
+
+/* ----- MODULAR ELEMENTS --------------------------- */
+.banner {
+  background-color: #1abc9c; /* featured-color */
+  background-size: cover;
+  background-position: center;
+  min-height:80vh;
+}
+
+.bg-img {
+  background-image: url('yoga-1.jpg'); /* if you are adding a unique image to every one you can remove this */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Buttons */
+.button,
+.button-inverted {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 0.5em 3em;
+  margin: 1em auto;
+  display: inline-block;
+  text-decoration: none;
+}
+.button-inverted {
+    border-color: white;
+    color: white;
+}
+.button:hover {
+  font-weight: bold;
+}
+
+/* ----- FORMS --------------------------- */
+
+input,
+textarea {
+  border-style: solid;
+  border: 1px solid grey;
+  padding: 0.8em;
+  -webkit-appearance: none;
+  font-family: 'Work Sans'; /* Site Font */
+  font-size: 1em;
+  display: block;
+  width: 100%;
+  margin: 1em auto;
+  vertical-align: top;
+}
+textarea {
+  min-height:80%;
+}
+input[type="submit"] {
+  width: auto;
+  display: block;
+  background-color: #1abc9c; /* teal */
+}
+
+form [class*=col-] {
+  padding: 1%;
+}
+
+/* ----- SPECIFIC PAGES  --------------------------- */
+
+
+/* BACKGROUND IMAGES */
+
+#intro-banner {
+  background-image: url('yoga-1.jpg');
+}
+
+
+@media(max-width:48em) {
+
+  /* ------ General Responsive Helpers ---------*/
+
+  /* These classes flip the order of the columns on a mobile layout so that we don't have two images touching. Try commenting them out and see the difference */
+  .mob-flip {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: reverse;
+          -ms-flex-direction: column-reverse;
+              flex-direction: column-reverse;
+  }
+  .mob-flip div {
+      width: 100%;
+  }
+
+  .mob-hide {
+      display: none;
+  }
+
+  .mob-show {
+    display: block;
+  }
+
+
+  /* ------ General Mobile Styles ---------*/
+  /* This aligns everything to center on mobile, this is purely slylistic, remove or adjust to suit your design */
+  body,
+  .left,
+  .right {
+    text-align: center;
+  }
+  /* This adjusts the padding on all columns, this is purely slylistic, adjust to suit your design. */
+  /* [class*=col-] is a fancy selector that selects everything class that contains col- including col-3, col-4 etc. */
+  .col,
+  [class*=col-] {}
+    padding: 1.5rem;
+  }
 }
